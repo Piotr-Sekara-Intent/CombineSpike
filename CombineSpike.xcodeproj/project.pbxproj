@@ -28,6 +28,13 @@
 		AE842413268348DC00F3527E /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE842412268348DC00F3527E /* ViewState.swift */; };
 		AE84241526834D0900F3527E /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE84241426834D0900F3527E /* Error.swift */; };
 		AE8424172683571600F3527E /* BreedImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8424162683571600F3527E /* BreedImageResponse.swift */; };
+		AEABF09E26846BB100F15B32 /* HomeViewModelSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABF09D26846BB100F15B32 /* HomeViewModelSpecs.swift */; };
+		AEABF0A126846C4400F15B32 /* MockAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABF0A026846C4400F15B32 /* MockAPIClient.swift */; };
+		AEABF0A4268473CA00F15B32 /* AnyScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABF0A3268473CA00F15B32 /* AnyScheduler.swift */; };
+		AEABF0A62684744400F15B32 /* AnySchedulerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABF0A52684744400F15B32 /* AnySchedulerBase.swift */; };
+		AEABF0A82684768000F15B32 /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABF0A72684768000F15B32 /* Scheduler.swift */; };
+		AEABF0AB26847AB200F15B32 /* TestScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABF0AA26847AB200F15B32 /* TestScheduler.swift */; };
+		AEABF0AD2684883000F15B32 /* CancelBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABF0AC2684883000F15B32 /* CancelBag.swift */; };
 		E07F51EF3260D9CC76E088B7 /* Pods_CombineSpikeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B8046E8149A4D638F0E776 /* Pods_CombineSpikeTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +78,13 @@
 		AE842412268348DC00F3527E /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		AE84241426834D0900F3527E /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		AE8424162683571600F3527E /* BreedImageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedImageResponse.swift; sourceTree = "<group>"; };
+		AEABF09D26846BB100F15B32 /* HomeViewModelSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelSpecs.swift; sourceTree = "<group>"; };
+		AEABF0A026846C4400F15B32 /* MockAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIClient.swift; sourceTree = "<group>"; };
+		AEABF0A3268473CA00F15B32 /* AnyScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyScheduler.swift; sourceTree = "<group>"; };
+		AEABF0A52684744400F15B32 /* AnySchedulerBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnySchedulerBase.swift; sourceTree = "<group>"; };
+		AEABF0A72684768000F15B32 /* Scheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scheduler.swift; sourceTree = "<group>"; };
+		AEABF0AA26847AB200F15B32 /* TestScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestScheduler.swift; sourceTree = "<group>"; };
+		AEABF0AC2684883000F15B32 /* CancelBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBag.swift; sourceTree = "<group>"; };
 		B0FEAD61F960B87E7D83C165 /* Pods-CombineSpikeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CombineSpikeTests.release.xcconfig"; path = "Target Support Files/Pods-CombineSpikeTests/Pods-CombineSpikeTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -152,6 +166,9 @@
 		AE8423D026832BF700F3527E /* CombineSpikeTests */ = {
 			isa = PBXGroup;
 			children = (
+				AEABF0A926847AA300F15B32 /* Utils */,
+				AEABF09F26846C3B00F15B32 /* Mocks */,
+				AEABF09B26846B9D00F15B32 /* Specs */,
 				AE8423D126832BF700F3527E /* CombineSpikeTests.swift */,
 				AE8423D326832BF700F3527E /* Info.plist */,
 			);
@@ -240,8 +257,10 @@
 		AE842405268339A300F3527E /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				AEABF0A2268473B900F15B32 /* Scheduler */,
 				AE842406268339A900F3527E /* Protocols */,
 				AE842412268348DC00F3527E /* ViewState.swift */,
+				AEABF0AC2684883000F15B32 /* CancelBag.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -261,8 +280,50 @@
 				AE84240C26833A0B00F3527E /* URL.swift */,
 				AE84240E26833A2100F3527E /* SwiftSugar.swift */,
 				AE84241426834D0900F3527E /* Error.swift */,
+				AEABF0A72684768000F15B32 /* Scheduler.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AEABF09B26846B9D00F15B32 /* Specs */ = {
+			isa = PBXGroup;
+			children = (
+				AEABF09C26846BA700F15B32 /* Home */,
+			);
+			path = Specs;
+			sourceTree = "<group>";
+		};
+		AEABF09C26846BA700F15B32 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				AEABF09D26846BB100F15B32 /* HomeViewModelSpecs.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		AEABF09F26846C3B00F15B32 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				AEABF0A026846C4400F15B32 /* MockAPIClient.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		AEABF0A2268473B900F15B32 /* Scheduler */ = {
+			isa = PBXGroup;
+			children = (
+				AEABF0A3268473CA00F15B32 /* AnyScheduler.swift */,
+				AEABF0A52684744400F15B32 /* AnySchedulerBase.swift */,
+			);
+			path = Scheduler;
+			sourceTree = "<group>";
+		};
+		AEABF0A926847AA300F15B32 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				AEABF0AA26847AB200F15B32 /* TestScheduler.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		BA414737345B315A19E4479C /* Frameworks */ = {
@@ -463,6 +524,7 @@
 				AE8423EB26832E5C00F3527E /* HomeView.swift in Sources */,
 				AE842413268348DC00F3527E /* ViewState.swift in Sources */,
 				AE8423F22683347F00F3527E /* HomeViewModel.swift in Sources */,
+				AEABF0AD2684883000F15B32 /* CancelBag.swift in Sources */,
 				AE8424172683571600F3527E /* BreedImageResponse.swift in Sources */,
 				AE8423C026832BF400F3527E /* CombineSpikeApp.swift in Sources */,
 				AE8423FA268337B300F3527E /* BreedListResponse.swift in Sources */,
@@ -470,6 +532,9 @@
 				AE8424112683474A00F3527E /* AppFoundation.swift in Sources */,
 				AE842402268338EB00F3527E /* AppEnvironment.swift in Sources */,
 				AE84240B268339F400F3527E /* URLRequest.swift in Sources */,
+				AEABF0A4268473CA00F15B32 /* AnyScheduler.swift in Sources */,
+				AEABF0A82684768000F15B32 /* Scheduler.swift in Sources */,
+				AEABF0A62684744400F15B32 /* AnySchedulerBase.swift in Sources */,
 				AE8423FD268337D000F3527E /* APIClient.swift in Sources */,
 				AE842408268339B400F3527E /* HumanReadableError.swift in Sources */,
 				AE8423FF268337DB00F3527E /* DefaultAPIClient.swift in Sources */,
@@ -482,7 +547,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEABF09E26846BB100F15B32 /* HomeViewModelSpecs.swift in Sources */,
+				AEABF0AB26847AB200F15B32 /* TestScheduler.swift in Sources */,
 				AE8423D226832BF700F3527E /* CombineSpikeTests.swift in Sources */,
+				AEABF0A126846C4400F15B32 /* MockAPIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

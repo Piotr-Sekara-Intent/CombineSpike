@@ -17,12 +17,13 @@ final class HomeViewModel: ObservableObject {
     @Published var state: ViewState = .loading
 
     private let apiClient: APIClient
-
-    private var cancellables = Set<AnyCancellable>()
+    private let scheduler: AnyScheduler<DispatchQueue>
+    private var cancelBag = CancelBag()
 
     // MARK: - Initializers
 
-    init(apiClient: APIClient) {
+    init(scheduler: AnyScheduler<DispatchQueue> = .main, apiClient: APIClient) {
+        self.scheduler = scheduler
         self.apiClient = apiClient
         loadBreeds()
     }
@@ -31,7 +32,7 @@ final class HomeViewModel: ObservableObject {
 
     func loadBreeds() {
         apiClient.fetchBreeds()
-            .receive(on: DispatchQueue.main)
+            .receive(on: scheduler)
             .sink { [weak self] in
                 switch $0 {
                 case let .failure(error):
@@ -43,17 +44,23 @@ final class HomeViewModel: ObservableObject {
                 self?.breeds = $0.sorted { $0.name < $1.name }
                 self?.state = .loaded
             }
-            .store(in: &cancellables)
+            .store(in: cancelBag)
     }
 
     func loadImage(for breed: String) {
+        let cancelBag = CancelBag()
         apiClient.fetchBreedImageURL(for: breed)
-            .receive(on: DispatchQueue.main)
-            .sink { _ in
-
+            .receive(on: scheduler)
+            .sink { [weak self] in
+                    switch $0 {
+                    case let .failure(error):
+                        self?.state = .failure(error)
+                    case .finished:
+                        break
+                    }
             } receiveValue: { [weak self] in
                 self?.breedImageURL = URL(string: $0)
             }
-            .store(in: &cancellables)
+            .store(in: cancelBag)
     }
 }
