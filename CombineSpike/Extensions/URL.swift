@@ -13,6 +13,7 @@ extension URL {
         guard let relativeUrl = URL(string: path, relativeTo: base) else { return nil }
 
         let comps = with(URLComponents(url: relativeUrl, resolvingAgainstBaseURL: true)!) {
+            guard !query.isEmpty else { return }
             $0.queryItems = query.map { URLQueryItem(name: $0, value: $1) }
         }
 

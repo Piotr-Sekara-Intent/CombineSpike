@@ -13,12 +13,13 @@ final class DefaultAPIClient: APIClient {
 
     private let environment: AppEnvironment
 
-    private let session = URLSession(configuration: .default)
+    private let session: URLSession
 
     // MARK: - Initializers
 
-    init(environment: AppEnvironment) {
+    init(environment: AppEnvironment, sessionConfiguration: URLSessionConfiguration = .default) {
         self.environment = environment
+        session = URLSession(configuration: sessionConfiguration)
     }
 
     // MARK: Core

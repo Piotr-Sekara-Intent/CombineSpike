@@ -35,6 +35,9 @@
 		AEABF0A82684768000F15B32 /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABF0A72684768000F15B32 /* Scheduler.swift */; };
 		AEABF0AB26847AB200F15B32 /* TestScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABF0AA26847AB200F15B32 /* TestScheduler.swift */; };
 		AEABF0AD2684883000F15B32 /* CancelBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABF0AC2684883000F15B32 /* CancelBag.swift */; };
+		AEABF0AF2684C07F00F15B32 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABF0AE2684C07F00F15B32 /* MockURLProtocol.swift */; };
+		AEABF0B32684C12500F15B32 /* DefaultAPIClientSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABF0B22684C12500F15B32 /* DefaultAPIClientSpecs.swift */; };
+		AEABF0B52684C18A00F15B32 /* MockAppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABF0B42684C18A00F15B32 /* MockAppEnvironment.swift */; };
 		E07F51EF3260D9CC76E088B7 /* Pods_CombineSpikeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B8046E8149A4D638F0E776 /* Pods_CombineSpikeTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +88,9 @@
 		AEABF0A72684768000F15B32 /* Scheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scheduler.swift; sourceTree = "<group>"; };
 		AEABF0AA26847AB200F15B32 /* TestScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestScheduler.swift; sourceTree = "<group>"; };
 		AEABF0AC2684883000F15B32 /* CancelBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBag.swift; sourceTree = "<group>"; };
+		AEABF0AE2684C07F00F15B32 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		AEABF0B22684C12500F15B32 /* DefaultAPIClientSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAPIClientSpecs.swift; sourceTree = "<group>"; };
+		AEABF0B42684C18A00F15B32 /* MockAppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppEnvironment.swift; sourceTree = "<group>"; };
 		B0FEAD61F960B87E7D83C165 /* Pods-CombineSpikeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CombineSpikeTests.release.xcconfig"; path = "Target Support Files/Pods-CombineSpikeTests/Pods-CombineSpikeTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -288,7 +294,8 @@
 		AEABF09B26846B9D00F15B32 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
-				AEABF09C26846BA700F15B32 /* Home */,
+				AEABF0B12684C10A00F15B32 /* API */,
+				AEABF0B02684C10200F15B32 /* Modules */,
 			);
 			path = Specs;
 			sourceTree = "<group>";
@@ -305,6 +312,8 @@
 			isa = PBXGroup;
 			children = (
 				AEABF0A026846C4400F15B32 /* MockAPIClient.swift */,
+				AEABF0AE2684C07F00F15B32 /* MockURLProtocol.swift */,
+				AEABF0B42684C18A00F15B32 /* MockAppEnvironment.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -324,6 +333,22 @@
 				AEABF0AA26847AB200F15B32 /* TestScheduler.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		AEABF0B02684C10200F15B32 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				AEABF09C26846BA700F15B32 /* Home */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		AEABF0B12684C10A00F15B32 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				AEABF0B22684C12500F15B32 /* DefaultAPIClientSpecs.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		BA414737345B315A19E4479C /* Frameworks */ = {
@@ -549,6 +574,9 @@
 			files = (
 				AEABF09E26846BB100F15B32 /* HomeViewModelSpecs.swift in Sources */,
 				AEABF0AB26847AB200F15B32 /* TestScheduler.swift in Sources */,
+				AEABF0B32684C12500F15B32 /* DefaultAPIClientSpecs.swift in Sources */,
+				AEABF0AF2684C07F00F15B32 /* MockURLProtocol.swift in Sources */,
+				AEABF0B52684C18A00F15B32 /* MockAppEnvironment.swift in Sources */,
 				AE8423D226832BF700F3527E /* CombineSpikeTests.swift in Sources */,
 				AEABF0A126846C4400F15B32 /* MockAPIClient.swift in Sources */,
 			);
