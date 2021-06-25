@@ -13,39 +13,19 @@ final class DefaultAPIClient: APIClient {
 
     private let environment: AppEnvironment
 
-    private let session: URLSession
+    private let session: URLSessionProtocol
 
     // MARK: - Initializers
 
-    init(environment: AppEnvironment, sessionConfiguration: URLSessionConfiguration = .default) {
+    init(environment: AppEnvironment, session: URLSessionProtocol = URLSession(configuration: .default)) {
         self.environment = environment
-        session = URLSession(configuration: sessionConfiguration)
+        self.session = session
     }
 
     // MARK: Core
 
-    private func data(with request: URLRequest) -> AnyPublisher<Data, Error> {
-        session.dataTaskPublisher(for: request).mapError { ApiError($0) }.tryMap { try self.validate($0, response: $1) }.eraseToAnyPublisher()
-    }
-
-    private func validate<T>(_ body: T, response: URLResponse) throws -> T {
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw ApiError(reason: .invalidResponse)
-        }
-
-        guard 200...399 ~= httpResponse.statusCode else {
-            if httpResponse.statusCode == 401 {
-                throw ApiError(reason: .authorizationFailed)
-            } else {
-                throw ApiError(reason: .invalidResponse)
-            }
-        }
-
-        return body
-    }
-
     private func get(url: URL, headers: [String: String] = [:], authorized: Bool = true) -> AnyPublisher<Data, Error> {
-        data(with: URLRequest(url: url, method: "GET", headers: headers))
+        session.data(with: URLRequest(url: url, method: "GET", headers: headers))
     }
 
     private func get(path: String, query: [String: String] = [:], headers: [String: String] = [:], authorized: Bool = true) -> AnyPublisher<Data, Error> {

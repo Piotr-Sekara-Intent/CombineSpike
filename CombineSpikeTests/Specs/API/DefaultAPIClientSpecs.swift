@@ -14,41 +14,65 @@ import Quick
 final class DefaultAPIClientSpecs: QuickSpec {
     override func spec() {
         describe("DefaultAPIClient") {
+            var mockURLSession: MockURLSession!
+
             var sut: DefaultAPIClient!
 
             beforeEach {
-                sut = DefaultAPIClient(environment: MockAppEnvironment(), sessionConfiguration: .mock)
+                mockURLSession = .init()
+                sut = DefaultAPIClient(environment: MockAppEnvironment(), session: mockURLSession)
             }
 
             describe("#fetchBreeds") {
                 var breeds: [Breed]!
-                var cancelBag: CancelBag!
 
                 beforeEach {
                     breeds = []
-                    cancelBag = CancelBag()
-                    MockURLProtocol.mockedURLs = [
-                        URL(string: "https://feature.com/api/breeds/list/all")!: try! JSONEncoder().encode(BreedListResponse(status: "success", breeds: [.init(name: "Test", subBreeds: []), .init(name: "Test2", subBreeds: ["Test3"])]))
-                    ]
 
-                    let validResponse = HTTPURLResponse(url: URL(string: "https://feature.com/api/breeds/list/all")!,
-                                                            statusCode: 200,
-                                                            httpVersion: nil,
-                                                            headerFields: nil)
+                    let breedsResponse = BreedListResponse(status: "success", breeds: [
+                        .init(name: "Maltese", subBreeds: []),
+                        .init(name: "Akita", subBreeds: [])
+                    ])
+                    mockURLSession.stubbedPublisher = Result.Publisher(try! JSONEncoder().encode(breedsResponse)).eraseToAnyPublisher()
 
-                    MockURLProtocol.mockedResponse = validResponse
-
-                    sut.fetchBreeds()
-                        .sink { completion in
-                            print(completion)
+                    _ = sut.fetchBreeds()
+                        .sink { _ in
                         } receiveValue: {
                             breeds = $0
                         }
-                        .store(in: cancelBag)
                 }
 
-                it("") {
-                    expect(breeds.isEmpty).to(beTruthy())
+                it("has correct request url path") {
+                    expect(mockURLSession.sentRequest?.url?.path).to(equal("/api/breeds/list/all"))
+                }
+
+                it("returns correct breeds") {
+                    expect(breeds.first(where: { $0.name == "Akita"})).toNot(beNil())
+                }
+            }
+
+            describe("#fetchBreedImageURL(for:)") {
+                var imageURL: String!
+
+                beforeEach {
+                    imageURL = ""
+
+                    let breedImageResponse = BreedImageResponse(status: "success", url: "https://feature.com/breeds/hound-afghan/n02088094_4219.jpg")
+                    mockURLSession.stubbedPublisher = Result.Publisher(try! JSONEncoder().encode(breedImageResponse)).eraseToAnyPublisher()
+
+                    _ = sut.fetchBreedImageURL(for: "australian shepherd")
+                        .sink { _ in
+                        } receiveValue: {
+                            imageURL = $0
+                        }
+                }
+
+                it("has correct request url path") {
+                    expect(mockURLSession.sentRequest?.url?.path).to(equal("/api/breed/australian/shepherd/images/random"))
+                }
+
+                it("returns correct image url") {
+                    expect(imageURL).to(equal("https://feature.com/breeds/hound-afghan/n02088094_4219.jpg"))
                 }
             }
         }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BreedImageResponse: Decodable {
+struct BreedImageResponse: Codable {
     let status: String
     let url: String
 }
